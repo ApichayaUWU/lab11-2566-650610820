@@ -5,18 +5,18 @@ export default function RegisFormPage() {
   const [fname, setFname] = useState("");
   const [fnameError, setFnameError] = useState(false);
   const [lname, setLname] = useState("");
-  const [lnameError, setlnameError] = useState(false);
+  const [lnameError, setLnameError] = useState(false);
   const [plan, setPlan] = useState("");
   const [planError, setPlanError] = useState(false);
   const [gender, setGender] = useState(null);
-  const [genderError, setGenderError] = useState(false);
+  const [genderError, setGenderError] = useState(true);
   const [buyBottle, setBuyBottle] = useState(false);
   const [buyShoes, setBuyShoes] = useState(false);
   const [buyCap, setBuyCap] = useState(false);
   const [rgOnClick, setRgOnClick] = useState(false);
   const [isUserAgree, setIsUserAgree] = useState(false);
 
-  const isUserAgreeOnChande = (event) => {
+  const isUserAgreeOnChange = (event) => {
     setIsUserAgree(event.target.checked);
   };
 
@@ -26,7 +26,7 @@ export default function RegisFormPage() {
   };
 
   const inputLnameOnChange = (event) => {
-    setlnameError(false);
+    setLnameError(false);
     setLname(event.target.value);
   };
 
@@ -36,12 +36,12 @@ export default function RegisFormPage() {
   };
 
   const radioGenderMaleOnChange = () => {
-    setGenderError("false");
+    setGenderError(false);
     setGender("male");
   };
 
   const radioGenderFemaleOnChange = () => {
-    setGenderError("false");
+    setGenderError(false);
     setGender("female");
   };
 
@@ -81,7 +81,7 @@ export default function RegisFormPage() {
     let lnameOk = true;
     if (lname === "") {
       lnameOk = false;
-      setlnameError(true);
+      setLnameError(true);
     }
 
     let planOk = true;
@@ -131,7 +131,7 @@ export default function RegisFormPage() {
       <div>
         <label className="form-label">Plan</label>
         <select
-          className={"form-control" + (planError ? " is-invalid" : "")}
+          className={"form-select" + (planError ? " is-invalid" : "")}
           onChange={selectPlanOnChange}
           value={plan}
         >
@@ -164,7 +164,7 @@ export default function RegisFormPage() {
           Female 👩
           {/* To show error when user did not select gender, */}
           {/* We just have to render the div below (Not using is-invalid bootstrap class) */}
-          {!genderError && rgOnClick && (
+          {genderError && rgOnClick && (
             <div className="text-danger">Please select gender</div>
           )}
         </div>
@@ -220,7 +220,7 @@ export default function RegisFormPage() {
         <input
           className="me-2"
           type="checkbox"
-          onChange={isUserAgreeOnChande}
+          onChange={isUserAgreeOnChange}
           checked={isUserAgree}
         />
         I agree to the terms and conditions
